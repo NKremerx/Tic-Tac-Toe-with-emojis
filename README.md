@@ -4,7 +4,7 @@ A fun, mobile-responsive Tic-Tac-Toe game featuring multiple emoji themes, AI op
 
 ## Play Now
 
-**[https://nkremerx.github.io/Tic-Tac-Toe-with-animal-emojis/](https://nkremerx.github.io/Tic-Tac-Toe-with-animal-emojis/)**
+**[https://nkremerx.github.io/Tic-Tac-Toe-with-emojis/](https://nkremerx.github.io/Tic-Tac-Toe-with-emojis/)**
 
 ## Features
 
@@ -85,7 +85,7 @@ Simply open `index.html` in any modern web browser. No build step or server requ
 
 ```bash
 # Clone the repository
-git clone https://github.com/NKremerx/Tic-Tac-Toe-with-animal-emojis.git
+git clone https://github.com/NKremerx/Tic-Tac-Toe-with-emojis.git
 
 # Open in browser
 open index.html

@@ -1,6 +1,6 @@
-# Tic-Tac-Toe: Animal Edition
+# Tic-Tac-Toe: Emoji Edition
 
-A fun, mobile-responsive Tic-Tac-Toe game featuring adorable animal emojis, AI opponents, visual effects, and sound.
+A fun, mobile-responsive Tic-Tac-Toe game featuring multiple emoji themes, AI opponents, visual effects, and sound.
 
 ## Play Now
 
@@ -8,7 +8,12 @@ A fun, mobile-responsive Tic-Tac-Toe game featuring adorable animal emojis, AI o
 
 ## Features
 
-- **12 Animal Emojis** - Choose your favorite: 🐱 🐶 🦊 🐰 🐼 🐨 🦁 🐯 🐻 🐷 🐸 🦄
+- **5 Emoji Categories** - Choose your favorite theme:
+  - 🐾 **Animals** - 🐱 🐶 🦊 🐰 🐼 🐨 🦁 🐯 🐻 🐷 🐸 🦄
+  - 🍎 **Fruits & Veggies** - 🍎 🍊 🍋 🍇 🍓 🍑 🥑 🥕 🌽 🍆 🥦 🍉
+  - 👽 **Humans & Aliens** - 👨 👩 👶 🧒 👴 👵 🤖 👽 👻 💀 🧛 🧟
+  - 😈 **Adult Only** - Suggestive emoji collection (12 emojis)
+  - ⭐ **Free Choice** - 50 popular emojis from all categories
 - **1-Player Mode** - Challenge the AI with three difficulty levels
 - **2-Player Mode** - Play against a friend on the same device
 - **AI Difficulty Levels**:
@@ -16,6 +21,7 @@ A fun, mobile-responsive Tic-Tac-Toe game featuring adorable animal emojis, AI o
   - 🤔 **Medium** - Sometimes smart (70% optimal, 30% random)
   - 🧠 **Hard** - Unbeatable (minimax algorithm)
 - **Visual Effects** - Floating particle background, confetti celebrations, smooth animations
+- **Dynamic Themes** - Background particles update to match your selected category
 - **Sound Effects** - Procedurally generated audio using Web Audio API
 - **Score Tracking** - Scores persist across sessions using LocalStorage
 - **Mobile Friendly** - Fully responsive design with touch optimization
@@ -24,10 +30,11 @@ A fun, mobile-responsive Tic-Tac-Toe game featuring adorable animal emojis, AI o
 
 1. **Start** - Tap anywhere on the welcome screen to begin
 2. **Choose Mode** - Select 1-Player (vs AI) or 2-Player (vs friend)
-3. **Pick Your Animal** - Select your favorite animal emoji
-4. **Select Difficulty** - (1-Player only) Choose Easy, Medium, or Hard
-5. **Play** - Take turns placing your emoji on the 3×3 grid
-6. **Win** - Get 3 of your emojis in a row (horizontal, vertical, or diagonal)
+3. **Pick Your Theme** - Select from 5 emoji categories
+4. **Pick Your Emoji** - Select your favorite emoji from the chosen category
+5. **Select Difficulty** - (1-Player only) Choose Easy, Medium, or Hard
+6. **Play** - Take turns placing your emoji on the 3×3 grid
+7. **Win** - Get 3 of your emojis in a row (horizontal, vertical, or diagonal)
 
 ## Game Screens
 
@@ -35,7 +42,8 @@ A fun, mobile-responsive Tic-Tac-Toe game featuring adorable animal emojis, AI o
 |--------|-------------|
 | Welcome | Animated intro with floating particles |
 | Menu | Choose game mode, tutorial, or settings |
-| Emoji Select | Pick your animal avatar |
+| Category Select | Pick your emoji theme (5 options) |
+| Emoji Select | Pick your emoji avatar |
 | Difficulty | Select AI difficulty (1-player only) |
 | Game | The main 3×3 game board |
 | Summary | Win/Lose/Draw results with play again option |
@@ -60,7 +68,7 @@ A fun, mobile-responsive Tic-Tac-Toe game featuring adorable animal emojis, AI o
 │   ├── animations.css      # Keyframe animations
 │   └── responsive.css      # Mobile breakpoints
 ├── js/
-│   ├── app.js              # Main entry, screen navigation
+│   ├── app.js              # Main entry, screen navigation, emoji categories
 │   ├── state.js            # Centralized state management
 │   ├── game.js             # Game logic, win detection
 │   ├── ai.js               # AI opponent (Easy/Medium/Hard)
@@ -101,4 +109,4 @@ MIT License - Feel free to use, modify, and distribute.
 
 ---
 
-Made with ❤️ and 🐱🐶🦊
+Made with ❤️ and 🎮⭐🎉🏆

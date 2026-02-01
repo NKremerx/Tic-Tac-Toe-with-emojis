@@ -14,6 +14,7 @@ const State = (function() {
         // Game mode
         gameMode: null, // '1player' or '2player'
         difficulty: null, // 'easy', 'medium', 'hard'
+        emojiCategory: 'animals', // 'animals', 'fruits', 'humans', 'adult', 'free'
 
         // Player emojis
         player1Emoji: null,

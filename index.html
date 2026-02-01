@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Tic-Tac-Toe - Animal Edition</title>
+    <title>Tic-Tac-Toe - Emoji Edition</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -16,9 +16,9 @@
     <section id="welcome-screen" class="screen active">
         <div class="welcome-content">
             <h1 class="title-bounce">🎮 Tic-Tac-Toe 🎮</h1>
-            <h2 class="subtitle">Animal Edition</h2>
-            <div class="emoji-parade">
-                <span>🐱</span><span>🐶</span><span>🦊</span><span>🐰</span>
+            <h2 class="subtitle" id="welcome-subtitle">Emoji Edition</h2>
+            <div class="emoji-parade" id="emoji-parade">
+                <span>🎮</span><span>⭐</span><span>🎉</span><span>🏆</span>
             </div>
             <p class="tap-hint pulse">Tap anywhere to start</p>
         </div>
@@ -49,24 +49,44 @@
         </div>
     </section>
 
+    <!-- Category Selection Screen -->
+    <section id="category-select-screen" class="screen">
+        <div class="category-select-content">
+            <button class="back-btn" data-action="back">← Back</button>
+            <h1>Choose Your Theme</h1>
+            <div class="category-buttons">
+                <button class="category-btn" data-category="animals">
+                    <span class="category-icon">🐾</span>
+                    <span class="category-text">Animals</span>
+                </button>
+                <button class="category-btn" data-category="fruits">
+                    <span class="category-icon">🍎</span>
+                    <span class="category-text">Fruits & Veggies</span>
+                </button>
+                <button class="category-btn" data-category="humans">
+                    <span class="category-icon">👽</span>
+                    <span class="category-text">Humans & Aliens</span>
+                </button>
+                <button class="category-btn" data-category="adult">
+                    <span class="category-icon">😈</span>
+                    <span class="category-text">Adult Only 🔞</span>
+                </button>
+                <button class="category-btn" data-category="free">
+                    <span class="category-icon">⭐</span>
+                    <span class="category-text">Free Choice</span>
+                    <span class="category-desc">(50 emojis)</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Emoji Selection Screen -->
     <section id="emoji-select-screen" class="screen">
         <div class="emoji-select-content">
             <button class="back-btn" data-action="back">← Back</button>
-            <h1 id="emoji-select-title">Player 1, Choose Your Animal!</h1>
+            <h1 id="emoji-select-title">Player 1, Choose Your Emoji!</h1>
             <div class="emoji-grid" id="emoji-grid">
-                <button class="emoji-option" data-emoji="🐱">🐱</button>
-                <button class="emoji-option" data-emoji="🐶">🐶</button>
-                <button class="emoji-option" data-emoji="🦊">🦊</button>
-                <button class="emoji-option" data-emoji="🐰">🐰</button>
-                <button class="emoji-option" data-emoji="🐼">🐼</button>
-                <button class="emoji-option" data-emoji="🐨">🐨</button>
-                <button class="emoji-option" data-emoji="🦁">🦁</button>
-                <button class="emoji-option" data-emoji="🐯">🐯</button>
-                <button class="emoji-option" data-emoji="🐻">🐻</button>
-                <button class="emoji-option" data-emoji="🐷">🐷</button>
-                <button class="emoji-option" data-emoji="🐸">🐸</button>
-                <button class="emoji-option" data-emoji="🦄">🦄</button>
+                <!-- Dynamically populated -->
             </div>
         </div>
     </section>
@@ -167,7 +187,7 @@
             <div class="tutorial-steps">
                 <div class="tutorial-step">
                     <span class="step-number">1</span>
-                    <p>Choose your favorite animal emoji to play as!</p>
+                    <p>Choose your favorite emoji to play as!</p>
                 </div>
                 <div class="tutorial-step">
                     <span class="step-number">2</span>

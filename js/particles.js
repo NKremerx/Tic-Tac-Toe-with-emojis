@@ -18,6 +18,9 @@ const Particles = (function() {
     const BG_PARTICLE_COUNT = 50;
     const CONFETTI_COUNT = 150;
 
+    // Current emoji set for particles
+    let currentEmojiSet = ['🐱', '🐶', '🦊', '🐰', '🐼', '🐨', '🦁', '🐯', '🐻', '🐷', '🐸', '🦄'];
+
     /**
      * Initialize background particles
      */
@@ -47,7 +50,7 @@ const Particles = (function() {
      * Create a background particle
      */
     function createBgParticle() {
-        const emojis = ['🐱', '🐶', '🦊', '🐰', '🐼', '🐨', '🦁', '🐯', '🐻', '🐷', '🐸', '🦄', '⭐', '✨'];
+        const emojis = [...currentEmojiSet, '⭐', '✨'];
         return {
             x: Math.random() * (bgCanvas?.width || window.innerWidth),
             y: Math.random() * (bgCanvas?.height || window.innerHeight),
@@ -59,6 +62,18 @@ const Particles = (function() {
             rotation: Math.random() * Math.PI * 2,
             rotationSpeed: (Math.random() - 0.5) * 0.02
         };
+    }
+
+    /**
+     * Set the emoji set for background particles
+     */
+    function setEmojiSet(emojis) {
+        currentEmojiSet = emojis;
+        // Recreate particles with new emoji set
+        bgParticles = [];
+        for (let i = 0; i < BG_PARTICLE_COUNT; i++) {
+            bgParticles.push(createBgParticle());
+        }
     }
 
     /**
@@ -302,6 +317,7 @@ const Particles = (function() {
         initConfetti,
         startConfetti,
         stopConfetti,
-        createBurst
+        createBurst,
+        setEmojiSet
     };
 })();

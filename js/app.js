@@ -6,6 +6,46 @@ const App = (function() {
     let screens = {};
     let initialized = false;
 
+    // Emoji categories
+    const EMOJI_CATEGORIES = {
+        animals: {
+            name: 'Animals',
+            subtitle: 'Animal Edition',
+            icon: '🐾',
+            emojis: ['🐱', '🐶', '🦊', '🐰', '🐼', '🐨', '🦁', '🐯', '🐻', '🐷', '🐸', '🦄']
+        },
+        fruits: {
+            name: 'Fruits & Veggies',
+            subtitle: 'Fruits & Veggies Edition',
+            icon: '🍎',
+            emojis: ['🍎', '🍊', '🍋', '🍇', '🍓', '🍑', '🥑', '🥕', '🌽', '🍆', '🥦', '🍉']
+        },
+        humans: {
+            name: 'Humans & Aliens',
+            subtitle: 'Humans & Aliens Edition',
+            icon: '👽',
+            emojis: ['👨', '👩', '👶', '🧒', '👴', '👵', '🤖', '👽', '👻', '💀', '🧛', '🧟']
+        },
+        adult: {
+            name: 'Adult Only',
+            subtitle: 'Adult Only Edition 🔞',
+            icon: '😈',
+            emojis: ['🍑', '🍆', '💦', '🍒', '🌶️', '👅', '💋', '🔥', '😈', '😏', '🥵', '🤤']
+        },
+        free: {
+            name: 'Free Choice',
+            subtitle: 'Free Choice Edition',
+            icon: '⭐',
+            emojis: [
+                '😀', '😎', '🥳', '😍', '🤩', '😂', '🥺', '😱', '🤔', '😴',
+                '❤️', '🔥', '⭐', '🌈', '☀️', '🌙', '⚡', '💎', '🎯', '🎪',
+                '🎮', '🎸', '🎨', '🎭', '🏆', '🎁', '🎈', '🎉', '🚀', '✈️',
+                '🚗', '🏠', '🌍', '🌸', '🌺', '🍕', '🍔', '🍦', '☕', '🍪',
+                '⚽', '🏀', '🎾', '🎱', '👑', '💫', '🦋', '🐝', '🌟', '💖'
+            ]
+        }
+    };
+
     /**
      * Initialize the application
      */
@@ -16,6 +56,7 @@ const App = (function() {
         screens = {
             welcome: document.getElementById('welcome-screen'),
             menu: document.getElementById('menu-screen'),
+            'category-select': document.getElementById('category-select-screen'),
             'emoji-select': document.getElementById('emoji-select-screen'),
             difficulty: document.getElementById('difficulty-screen'),
             game: document.getElementById('game-screen'),
@@ -32,6 +73,7 @@ const App = (function() {
         // Set up event listeners
         setupWelcomeScreen();
         setupMenuScreen();
+        setupCategoryScreen();
         setupEmojiSelectScreen();
         setupDifficultyScreen();
         setupGameScreen();
@@ -108,8 +150,7 @@ const App = (function() {
                             selectingPlayer: 1,
                             player2Emoji: null
                         });
-                        updateEmojiSelectTitle(1);
-                        State.navigateTo('emoji-select');
+                        State.navigateTo('category-select');
                         break;
 
                     case '2player':
@@ -118,8 +159,7 @@ const App = (function() {
                             selectingPlayer: 1,
                             player2Emoji: null
                         });
-                        updateEmojiSelectTitle(1);
-                        State.navigateTo('emoji-select');
+                        State.navigateTo('category-select');
                         break;
 
                     case 'tutorial':
@@ -132,6 +172,99 @@ const App = (function() {
                 }
             });
         });
+    }
+
+    /**
+     * Setup Category Selection Screen
+     */
+    function setupCategoryScreen() {
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const backBtn = document.querySelector('#category-select-screen .back-btn');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                Audio.playClick();
+                const category = btn.dataset.category;
+                State.setState({ emojiCategory: category });
+
+                // Update particles and welcome screen for this category
+                updateParticlesForCategory(category);
+                updateWelcomeScreen(category);
+
+                // Populate emoji grid and navigate
+                populateEmojiGrid(category);
+                updateEmojiSelectTitle(1);
+                State.navigateTo('emoji-select');
+            });
+        });
+
+        backBtn.addEventListener('click', () => {
+            Audio.playClick();
+            State.navigateTo('menu');
+        });
+    }
+
+    /**
+     * Populate emoji grid based on category
+     */
+    function populateEmojiGrid(category) {
+        const emojiGrid = document.getElementById('emoji-grid');
+        const categoryData = EMOJI_CATEGORIES[category];
+
+        // Clear existing emojis
+        emojiGrid.innerHTML = '';
+
+        // Add/remove free-choice class for 5-column layout
+        if (category === 'free') {
+            emojiGrid.classList.add('free-choice');
+        } else {
+            emojiGrid.classList.remove('free-choice');
+        }
+
+        // Create emoji buttons
+        categoryData.emojis.forEach(emoji => {
+            const btn = document.createElement('button');
+            btn.className = 'emoji-option';
+            btn.dataset.emoji = emoji;
+            btn.textContent = emoji;
+            emojiGrid.appendChild(btn);
+        });
+
+        // Update grid to reflect current state
+        updateEmojiGrid();
+    }
+
+    /**
+     * Update welcome screen based on category
+     */
+    function updateWelcomeScreen(category) {
+        const subtitle = document.getElementById('welcome-subtitle');
+        const parade = document.getElementById('emoji-parade');
+        const categoryData = EMOJI_CATEGORIES[category];
+
+        if (subtitle) {
+            subtitle.textContent = categoryData.subtitle;
+        }
+
+        if (parade) {
+            parade.innerHTML = '';
+            // Show first 4 emojis from the category
+            categoryData.emojis.slice(0, 4).forEach(emoji => {
+                const span = document.createElement('span');
+                span.textContent = emoji;
+                parade.appendChild(span);
+            });
+        }
+    }
+
+    /**
+     * Update particles for category
+     */
+    function updateParticlesForCategory(category) {
+        const categoryData = EMOJI_CATEGORIES[category];
+        if (Particles.setEmojiSet) {
+            Particles.setEmojiSet(categoryData.emojis);
+        }
     }
 
     /**
@@ -184,7 +317,8 @@ const App = (function() {
                 updateEmojiSelectTitle(1);
                 updateEmojiGrid();
             } else {
-                State.navigateTo('menu');
+                // Go back to category selection
+                State.navigateTo('category-select');
             }
         });
     }
@@ -197,9 +331,9 @@ const App = (function() {
         const gameMode = State.get('gameMode');
 
         if (gameMode === '1player') {
-            title.textContent = 'Choose Your Animal!';
+            title.textContent = 'Choose Your Emoji!';
         } else {
-            title.textContent = `Player ${player}, Choose Your Animal!`;
+            title.textContent = `Player ${player}, Choose Your Emoji!`;
         }
     }
 
@@ -223,7 +357,8 @@ const App = (function() {
      * Get random AI emoji (different from player's)
      */
     function getRandomAiEmoji(playerEmoji) {
-        const emojis = ['🐱', '🐶', '🦊', '🐰', '🐼', '🐨', '🦁', '🐯', '🐻', '🐷', '🐸', '🦄'];
+        const category = State.get('emojiCategory') || 'animals';
+        const emojis = EMOJI_CATEGORIES[category].emojis;
         const available = emojis.filter(e => e !== playerEmoji);
         return available[Math.floor(Math.random() * available.length)];
     }
@@ -246,13 +381,14 @@ const App = (function() {
 
         backBtn.addEventListener('click', () => {
             Audio.playClick();
+            const category = State.get('emojiCategory') || 'animals';
             State.setState({
                 selectingPlayer: 1,
                 player1Emoji: null,
                 player2Emoji: null
             });
+            populateEmojiGrid(category);
             updateEmojiSelectTitle(1);
-            updateEmojiGrid();
             State.navigateTo('emoji-select');
         });
     }

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tic-Tac-Toe - Animal Edition</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Particle Canvas (background) -->
+    <canvas id="particles"></canvas>
+
+    <!-- Welcome Screen -->
+    <section id="welcome-screen" class="screen active">
+        <div class="welcome-content">
+            <h1 class="title-bounce">🎮 Tic-Tac-Toe 🎮</h1>
+            <h2 class="subtitle">Animal Edition</h2>
+            <div class="emoji-parade">
+                <span>🐱</span><span>🐶</span><span>🦊</span><span>🐰</span>
+            </div>
+            <p class="tap-hint pulse">Tap anywhere to start</p>
+        </div>
+    </section>
+
+    <!-- Menu Screen -->
+    <section id="menu-screen" class="screen">
+        <div class="menu-content">
+            <h1>🎯 Main Menu</h1>
+            <div class="menu-buttons">
+                <button class="menu-btn" data-action="1player">
+                    <span class="btn-icon">🤖</span>
+                    <span class="btn-text">1 Player</span>
+                </button>
+                <button class="menu-btn" data-action="2player">
+                    <span class="btn-icon">👥</span>
+                    <span class="btn-text">2 Players</span>
+                </button>
+                <button class="menu-btn" data-action="tutorial">
+                    <span class="btn-icon">📖</span>
+                    <span class="btn-text">How to Play</span>
+                </button>
+                <button class="menu-btn" data-action="settings">
+                    <span class="btn-icon">⚙️</span>
+                    <span class="btn-text">Settings</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emoji Selection Screen -->
+    <section id="emoji-select-screen" class="screen">
+        <div class="emoji-select-content">
+            <button class="back-btn" data-action="back">← Back</button>
+            <h1 id="emoji-select-title">Player 1, Choose Your Animal!</h1>
+            <div class="emoji-grid" id="emoji-grid">
+                <button class="emoji-option" data-emoji="🐱">🐱</button>
+                <button class="emoji-option" data-emoji="🐶">🐶</button>
+                <button class="emoji-option" data-emoji="🦊">🦊</button>
+                <button class="emoji-option" data-emoji="🐰">🐰</button>
+                <button class="emoji-option" data-emoji="🐼">🐼</button>
+                <button class="emoji-option" data-emoji="🐨">🐨</button>
+                <button class="emoji-option" data-emoji="🦁">🦁</button>
+                <button class="emoji-option" data-emoji="🐯">🐯</button>
+                <button class="emoji-option" data-emoji="🐻">🐻</button>
+                <button class="emoji-option" data-emoji="🐷">🐷</button>
+                <button class="emoji-option" data-emoji="🐸">🐸</button>
+                <button class="emoji-option" data-emoji="🦄">🦄</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Difficulty Selection Screen -->
+    <section id="difficulty-screen" class="screen">
+        <div class="difficulty-content">
+            <button class="back-btn" data-action="back">← Back</button>
+            <h1>Choose Difficulty</h1>
+            <div class="difficulty-buttons">
+                <button class="difficulty-btn easy" data-difficulty="easy">
+                    <span class="diff-icon">😊</span>
+                    <span class="diff-text">Easy</span>
+                    <span class="diff-desc">Random moves</span>
+                </button>
+                <button class="difficulty-btn medium" data-difficulty="medium">
+                    <span class="diff-icon">🤔</span>
+                    <span class="diff-text">Medium</span>
+                    <span class="diff-desc">Sometimes smart</span>
+                </button>
+                <button class="difficulty-btn hard" data-difficulty="hard">
+                    <span class="diff-icon">🧠</span>
+                    <span class="diff-text">Hard</span>
+                    <span class="diff-desc">Unbeatable!</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Screen -->
+    <section id="game-screen" class="screen">
+        <div class="game-content">
+            <div class="game-header">
+                <button class="back-btn" data-action="home">🏠</button>
+                <div class="turn-indicator">
+                    <span id="current-player-emoji">🐱</span>
+                    <span>'s turn</span>
+                </div>
+                <button class="sound-toggle" id="quick-sound-toggle">🔊</button>
+            </div>
+
+            <div class="scoreboard">
+                <div class="score player1-score">
+                    <span class="score-emoji" id="p1-score-emoji">🐱</span>
+                    <span class="score-value" id="p1-score">0</span>
+                </div>
+                <div class="score draws-score">
+                    <span class="score-label">Draws</span>
+                    <span class="score-value" id="draws-score">0</span>
+                </div>
+                <div class="score player2-score">
+                    <span class="score-emoji" id="p2-score-emoji">🐶</span>
+                    <span class="score-value" id="p2-score">0</span>
+                </div>
+            </div>
+
+            <div class="game-board" id="game-board">
+                <button class="cell" data-index="0"></button>
+                <button class="cell" data-index="1"></button>
+                <button class="cell" data-index="2"></button>
+                <button class="cell" data-index="3"></button>
+                <button class="cell" data-index="4"></button>
+                <button class="cell" data-index="5"></button>
+                <button class="cell" data-index="6"></button>
+                <button class="cell" data-index="7"></button>
+                <button class="cell" data-index="8"></button>
+            </div>
+
+            <button class="restart-btn" id="restart-btn">🔄 New Round</button>
+        </div>
+    </section>
+
+    <!-- Summary Screen -->
+    <section id="summary-screen" class="screen">
+        <div class="summary-content">
+            <div class="result-display">
+                <h1 id="result-title">Victory!</h1>
+                <div class="result-emoji" id="result-emoji">🐱</div>
+                <p id="result-message">Player 1 wins!</p>
+            </div>
+            <div class="summary-buttons">
+                <button class="summary-btn play-again" data-action="playAgain">
+                    🎮 Play Again
+                </button>
+                <button class="summary-btn home" data-action="home">
+                    🏠 Main Menu
+                </button>
+            </div>
+        </div>
+        <canvas id="confetti-canvas"></canvas>
+    </section>
+
+    <!-- Tutorial Screen -->
+    <section id="tutorial-screen" class="screen">
+        <div class="tutorial-content">
+            <button class="back-btn" data-action="back">← Back</button>
+            <h1>📖 How to Play</h1>
+            <div class="tutorial-steps">
+                <div class="tutorial-step">
+                    <span class="step-number">1</span>
+                    <p>Choose your favorite animal emoji to play as!</p>
+                </div>
+                <div class="tutorial-step">
+                    <span class="step-number">2</span>
+                    <p>Take turns placing your emoji on the 3×3 grid</p>
+                </div>
+                <div class="tutorial-step">
+                    <span class="step-number">3</span>
+                    <p>Get 3 of your emojis in a row (horizontal, vertical, or diagonal) to win!</p>
+                </div>
+                <div class="tutorial-step">
+                    <span class="step-number">4</span>
+                    <p>If all 9 squares are filled with no winner, it's a draw!</p>
+                </div>
+            </div>
+            <div class="tutorial-demo">
+                <div class="demo-board">
+                    <span>🐱</span><span>🐶</span><span>🐱</span>
+                    <span>🐶</span><span>🐱</span><span>🐶</span>
+                    <span>🐶</span><span>🐱</span><span class="winner-cell">🐱</span>
+                </div>
+                <p>Diagonal win! 🎉</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Screen -->
+    <section id="settings-screen" class="screen">
+        <div class="settings-content">
+            <button class="back-btn" data-action="back">← Back</button>
+            <h1>⚙️ Settings</h1>
+            <div class="settings-options">
+                <div class="setting-item">
+                    <span class="setting-label">🎵 Background Music</span>
+                    <button class="toggle-btn" id="music-toggle" data-setting="music">
+                        <span class="toggle-state">ON</span>
+                    </button>
+                </div>
+                <div class="setting-item">
+                    <span class="setting-label">🔊 Sound Effects</span>
+                    <button class="toggle-btn" id="sfx-toggle" data-setting="sfx">
+                        <span class="toggle-state">ON</span>
+                    </button>
+                </div>
+                <div class="setting-item">
+                    <button class="reset-btn" id="reset-scores">
+                        🗑️ Reset All Scores
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
